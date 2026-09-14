@@ -219,6 +219,15 @@
         .input-group input, .input-group select { width: 100%; background: #0a0a0a; border: 1px solid #333; padding: 15px; color: white; font-size: 1.1rem; }
         .input-group input:focus { border-color: var(--neon-green); outline: none; }
 
+        .consent-row {
+            display: flex; gap: 12px; align-items: flex-start; margin: 18px 0 24px;
+            color: #aaa; font-size: 0.88rem; line-height: 1.5;
+        }
+        .consent-row input { width: 18px; height: 18px; margin-top: 3px; accent-color: var(--neon-green); flex: 0 0 auto; }
+        .consent-row a, footer a { color: var(--neon-green); text-decoration: none; }
+        .consent-row a:hover, footer a:hover { text-decoration: underline; }
+        .legal-links { margin-top: 14px; display: flex; justify-content: center; gap: 18px; flex-wrap: wrap; font-size: 0.9rem; }
+
         /* --- MOBILE FIXES (Исправления) --- */
         @media (max-width: 768px) {
             /* 1. ФИКС ХЕДЕРА (iPhone 12/13) */
@@ -523,6 +532,12 @@
                     </div>
                     <div class="input-group"><label>Name</label><input id="name" type="text" placeholder="Your Name" required></div>
                     <div class="input-group"><label>Phone</label><input id="phone" type="tel" placeholder="(555) 000-0000" required></div>
+                    <label class="consent-row">
+                        <input id="smsConsent" type="checkbox">
+                        <span>
+                            By checking this box, I agree to receive recruiting and application-related text messages from Laiko Company LLC at the phone number provided, including messages sent using automated technology. Message frequency varies. Message and data rates may apply. Reply STOP to opt out or HELP for help. Consent is not a condition of submitting an application. See our <a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a> and <a href="terms-and-conditions.html" target="_blank" rel="noopener">Terms &amp; Conditions</a>.
+                        </span>
+                    </label>
                     <button type="submit" class="btn-submit">SEND APPLICATION</button>
                 </form>
             </div>
@@ -533,6 +548,10 @@
         <div class="container" style="text-align: center; color: #666;">
             <div class="logo" style="font-size: 1.5rem; margin-bottom: 20px;">LAIKO <span>COMPANY</span> LLC</div>
             <p>Gary, Indiana, USA | DOT: 4132866</p>
+            <div class="legal-links">
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="terms-and-conditions.html">Terms &amp; Conditions</a>
+            </div>
             <br>
             <p>&copy; 2026 Laiko Company LLC. All Rights Reserved.</p>
         </div>
@@ -558,11 +577,13 @@
             const position = document.getElementById('pos').value;
             const name = document.getElementById('name').value;
             const phone = document.getElementById('phone').value;
+            const smsConsent = document.getElementById('smsConsent').checked;
 
             const message = `<b>🔥 NEW APPLICATION (WEBSITE)</b>\n\n` +
                             `<b>👤 Name:</b> ${name}\n` +
                             `<b>📞 Phone:</b> ${phone}\n` +
-                            `<b>🚛 Position:</b> ${position}`;
+                            `<b>🚛 Position:</b> ${position}\n` +
+                            `<b>💬 SMS Consent:</b> ${smsConsent ? 'YES' : 'NO'}`;
 
             const btn = this.querySelector('.btn-submit');
             const originalText = btn.innerText;
